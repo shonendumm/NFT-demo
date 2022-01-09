@@ -9,7 +9,7 @@ contract SimpleCollectible is ERC721 {
     uint256 public tokenCounter;
 
     constructor () public ERC721 ("Doggie", "DOG"){
-        // initialize tokenCounter to 0
+        // initialize tokenCounter to 0, for token id
         tokenCounter = 0;
     }
 
