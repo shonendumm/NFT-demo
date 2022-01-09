@@ -1,5 +1,10 @@
+# Untill here: https://youtu.be/M576WGiDBdQ?t=37168
+# Writing unit tests
+
 # Untill here: https://youtu.be/M576WGiDBdQ?t=36806
 # Prepare to add tokenURI metadata when creating collectible
+
+
 from scripts.helpful_scripts import get_account, SimpleCollectible
 
 
