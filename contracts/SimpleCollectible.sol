@@ -19,7 +19,7 @@ contract SimpleCollectible is ERC721 {
         uint256 newTokenId = tokenCounter;
         // use _safeMint inherited from ERC721 contract to mint a token
         _safeMint(msg.sender, newTokenId);
-        // add tokenURI to get token metadata from IPFS
+        // add tokenURI to set token metadata from IPFS
         _setTokenURI(newTokenId, tokenURI);
         tokenCounter = tokenCounter + 1;
         return newTokenId;
