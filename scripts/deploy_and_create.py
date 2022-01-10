@@ -17,8 +17,10 @@ sample_token_uri2 = 'https://ipfs.io/ipfs/QmUFpt5K8MhH6B2s25TgNeT9PShmyPEV5RBQxh
 opensea_url = "https://testnets.opensea.io/assets/{}/{}"
 
 
-
 def main():
+    deploy_and_create
+
+def deploy_and_create():
     account = get_account()
     simple_collectible = SimpleCollectible.deploy({"from": account})
     tx = simple_collectible.createCollectible(sample_token_uri, {"from": account})
@@ -26,3 +28,4 @@ def main():
     print(f"Congrats! You can view your NFT now at {opensea_url.format(simple_collectible.address, simple_collectible.tokenCounter() - 1)}")
     # tokenCounter() is the tokenID, but after every mint, it's already +1, so we need to -1 to get the actual minted tokenID
     print("Please wait 20 minutes, and hit the refresh metadata button")
+    return simple_collectible
