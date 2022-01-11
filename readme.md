@@ -2,6 +2,10 @@
 NFT Doggie minted, available to view via OpenSea testnet
 https://testnets.opensea.io/assets/0x9cEe94b1E4E62ae5F227Fd45cEBf380469f522d4/0 
 
+### Deploy SimpleCollectible contract
+brownie run scripts/deploy_and_create.py --network rinkeby
+
+
 ### How does opensea keep track of newly minted NFTs? (including testnets)
 
 See https://ethereum.stackexchange.com/questions/106942/what-process-does-opensea-use-to-get-all-the-nfts-of-a-wallet/106949 
@@ -11,7 +15,7 @@ See https://ethereum.stackexchange.com/questions/106942/what-process-does-opense
 While you're doing this, Opensea updates the NFT information to its own server, so when you're done, go to Opensea and you'll see your NFT.Sometimes it's slow, like when the metadata isn't showing, you can click sync." Or refresh webpage.
 
 ### What is the amount of ETH and gas fees to deploy the contract and mint the NFT on rinkeby?
-View the txn details at https://rinkeby.etherscan.io/address/0x9cee94b1e4e62ae5f227fd45cebf380469f522d4
+View the example txn details at https://rinkeby.etherscan.io/address/0xf0Da5D362fF2031CdACeAd3fE1a55bFf7288d5Ec
 
 Deploy contract: 
 Transaction fee 0.001833897014671176 eth

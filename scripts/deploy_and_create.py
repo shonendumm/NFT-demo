@@ -11,7 +11,6 @@ from scripts.helpful_scripts import get_account, SimpleCollectible
 # upload image/json file to IPFS, but this is from Patrick's tutorial
 sample_token_uri = 'https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json'
 
-sample_token_uri2 = 'https://ipfs.io/ipfs/QmUFpt5K8MhH6B2s25TgNeT9PShmyPEV5RBQxhoAP2YApU?filename=pug.json'
 
 # {NFT_contract_address}/{tokenId}
 opensea_url = "https://testnets.opensea.io/assets/{}/{}"
