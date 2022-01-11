@@ -18,11 +18,11 @@ opensea_url = "https://testnets.opensea.io/assets/{}/{}"
 
 
 def main():
-    deploy_and_create
+    deploy_and_create()
 
 def deploy_and_create():
     account = get_account()
-    simple_collectible = SimpleCollectible.deploy({"from": account})
+    simple_collectible = SimpleCollectible.deploy({"from": account}, publish_source = True)
     tx = simple_collectible.createCollectible(sample_token_uri, {"from": account})
     tx.wait(1)
     print(f"Congrats! You can view your NFT now at {opensea_url.format(simple_collectible.address, simple_collectible.tokenCounter() - 1)}")

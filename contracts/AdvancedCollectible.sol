@@ -4,6 +4,10 @@ pragma solidity 0.6.6;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
+
+// until here https://youtu.be/M576WGiDBdQ?t=38432 
+// finished the contract but need to find way to add the tokenURI
+
 contract AdvancedCollectible is ERC721, VRFConsumerBase {
 
     uint256 public tokenCounter;
@@ -49,9 +53,10 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         tokenCounter = tokenCounter + 1;
     }
 
+    // create a setTokenURI function so that we can call this from outside with the _tokenURI argument
     function setTokenURI(uint256 tokenId, string memory _tokenURI) public {
         // need 3 tokenURIs for the 3 breeds
-        // we want to let only the owner of the tokenId mint set the tokenURI
+        // we want to let only the owner of the tokenId set the tokenURI
         // checks that msgSender is the owner
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: Caller is not owner nor approved.");
         _setTokenURI(tokenId, _tokenURI);
