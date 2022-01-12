@@ -14,3 +14,20 @@
         { "display_type": "boost_number", "trait_type": "zug booster", "value": 0 }
     ]
 }
+
+// etherOrcs NFT has base64 encoded its JSON tokenURI
+// We decode it using https://www.base64decode.org/ to get the above
+
+// Then, to decode the image attribute at "image", 
+// take the base64 encoded part and decode it using
+//  https://www.base64decode.org again
+// then pass the <svg ... code to
+// https://mybyways.com/blog/convert-svg-to-png-using-your-browser
+// it will generate the png.
+
+// Hence, to encode the JSON tokenURI, we can do the reverse:
+// 1. Convert the png to svg
+// 2. Encode the svg to base64
+// 3. put the encoded svg to the image attribute in the tokenURI json
+// 4. Encode the json to base64
+// 5. put the encoded string to the tokenURI

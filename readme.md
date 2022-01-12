@@ -27,3 +27,23 @@ Gas price 0.000000001000000008 eth
 
 Total about 6.51 USD, but this is for rinkeby testnet when gas prices are free/low
 
+### How to store image data in tokenURI on chain?
+
+Refer to the etherOrcs files in /img.
+
+The etherOrcs NFT has base64 encoded its JSON tokenURI
+We can decode it using https://www.base64decode.org/ to get its tokenURI and attributes in json.
+
+Then, to decode the image attribute at "image", 
+take the base64 encoded part and decode it using
+ https://www.base64decode.org again
+then pass the <svg ... > code to
+https://mybyways.com/blog/convert-svg-to-png-using-your-browser
+it will generate the png.
+
+Hence, to encode the tokenURI, we can do the reverse:
+1. Convert your png to svg
+2. Encode the svg to base64
+3. put the encoded svg in the image attribute in the tokenURI json
+4. Encode the json to base64
+5. pass the encoded string as the tokenURI when minting
