@@ -1,10 +1,16 @@
 ##  Doggie (DOG) NFT named Pug
 NFT Doggie minted, available to view via OpenSea testnet
-https://testnets.opensea.io/assets/0x9cEe94b1E4E62ae5F227Fd45cEBf380469f522d4/0 
+https://testnets.opensea.io/assets/0x6E0C3760670875De758f15EEDdC8d311F274Cea6/0
 
 ### Deploy SimpleCollectible contract
 brownie run scripts/deploy_and_create.py --network rinkeby
 
+### Note
+The code written here is only compatible with older versions of solidity and openzeppelin contracts.
+
+The new openzeppelin contract's implementation of ERC721, i.e. its functions/ABI are different, and requires a newer version of solidity.
+
+Hence, depending on which release of openzeppelin you're importing/inheriting for ERC721, we need to look at the documentation for the ABI/functions.
 
 ### How does opensea keep track of newly minted NFTs? (including testnets)
 
@@ -29,21 +35,4 @@ Total about 6.51 USD, but this is for rinkeby testnet when gas prices are free/l
 
 ### How to store image data in tokenURI on chain?
 
-Refer to the etherOrcs files in /img.
-
-The etherOrcs NFT has base64 encoded its JSON tokenURI
-We can decode it using https://www.base64decode.org/ to get its tokenURI and attributes in json.
-
-Then, to decode the image attribute at "image", 
-take the base64 encoded part and decode it using
- https://www.base64decode.org again
-then pass the <svg ... > code to
-https://mybyways.com/blog/convert-svg-to-png-using-your-browser
-it will generate the png.
-
-Hence, to encode the tokenURI, we can do the reverse:
-1. Convert your png to svg
-2. Encode the svg to base64
-3. put the encoded svg in the image attribute in the tokenURI json
-4. Encode the json to base64
-5. pass the encoded string as the tokenURI when minting
+Refer to NFTonChain repo

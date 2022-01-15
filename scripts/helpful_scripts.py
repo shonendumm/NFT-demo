@@ -1,4 +1,4 @@
-from brownie import accounts, network, config, SimpleCollectible
+from brownie import accounts, network, config
 
 LOCAL_BLOCKCHAIN_ENV = ["hardhat", "development", "ganache", "mainnet-fork"]
 

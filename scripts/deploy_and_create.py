@@ -5,7 +5,8 @@
 # Prepare to add tokenURI metadata when creating collectible
 
 
-from scripts.helpful_scripts import get_account, SimpleCollectible
+from scripts.helpful_scripts import get_account
+from brownie import SimpleCollectible
 
 
 # upload image/json file to IPFS, but this is from Patrick's tutorial
