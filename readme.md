@@ -2,7 +2,7 @@
 NFT Doggie minted, available to view via OpenSea testnet
 https://testnets.opensea.io/assets/0x6E0C3760670875De758f15EEDdC8d311F274Cea6/0
 
-### Deploy SimpleCollectible contract
+### Deploy SimpleCollectible contract to testnet
 brownie run scripts/deploy_and_create.py --network rinkeby
 
 ### Note
@@ -31,8 +31,13 @@ Mint pug:
 Transaction fee 0.000253904002031232 eth
 Gas price 0.000000001000000008 eth
 
-Total about 6.51 USD, but this is for rinkeby testnet when gas prices are free/low
+Total about 6.51 USD, but this is for rinkeby testnet where gas prices are free/low
 
 ### How to store image data in tokenURI on chain?
 
 Refer to NFTonChain repo
+
+## AdvancedCollectible
+
+1. Upload an image to IPFS (or pinata) ourselves
+2. Perhaps make the contract ownable (only the owner can mint), and verifiably scarce/ random. 

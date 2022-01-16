@@ -36,12 +36,13 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     function createCollectible() public returns (bytes32){
         // we want the request id 
         bytes32 requestId = requestRandomness(keyhash, fee);
-        // map requestId to sender's address, so that later we have the requestId, can find the owner to assign the NFT
+        // map requestId to sender's address, so that later when the requestId is returned, can find the owner to assign the NFT
         requestIdToSender[requestId] = msg.sender;
+        // emit event so that it's easier to test later 
         emit requestedCollectible(requestId, msg.sender);
     }
 
-    // fulfillRandomness will be called by VRFCoordinator at Chainlink
+    // Callback function called by VRFCoordinator at Chainlink, override the inherited function
     function fulfillRandomness(bytes32 requestId, uint256 randomNumber) internal override {
         Breed breed = Breed(randomNumber % 3);
         uint256 newTokenId = tokenCounter;
@@ -52,7 +53,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         address owner = requestIdToSender[requestId];
         _safeMint(owner, newTokenId);
 
-        // we skip this _setTokenURI for now, for simplicity...
+        // we skip the _setTokenURI for now, for simplicity...
         // _setTokenURI(newTokenId, tokenURI);
         tokenCounter = tokenCounter + 1;
     }
