@@ -3,7 +3,7 @@ NFT Doggie minted, available to view via OpenSea testnet
 https://testnets.opensea.io/assets/0x6E0C3760670875De758f15EEDdC8d311F274Cea6/0
 
 ### Deploy SimpleCollectible contract to testnet
-brownie run scripts/deploy_and_create.py --network rinkeby
+brownie run scripts/simpleCollectible/deploy_and_create.py --network rinkeby
 
 ### Note
 The code written here is only compatible with older versions of solidity and openzeppelin contracts.

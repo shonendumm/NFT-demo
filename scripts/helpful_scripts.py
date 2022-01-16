@@ -9,6 +9,12 @@ STARTING_PRICE = 200000000000 # 2000 * 10**8 , 1 eth = 2000 usd
 
 OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
 
+BREED_MAPPING = {0: "PUG", 1: "SHIBA_INU", 2: "ST_BERNARD"}
+
+def getBreed(breed_number):
+    return BREED_MAPPING[breed_number]
+
+
 def get_account(index=None, id=None):
     if index:
         return accounts[index]
