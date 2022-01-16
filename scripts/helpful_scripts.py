@@ -61,7 +61,7 @@ def deploy_mocks(decimals=DECIMALS, starting_price=STARTING_PRICE):
     VRFCoordinatorMock.deploy(link_token.address, {"from": account})
     print("Mocks deployed!")
 
-def fund_with_link(contract_address, account=None, link_token=None, amount=Web3.toWei(1, "ether")):
+def fund_with_link(contract_address, account=None, link_token=None, amount=Web3.toWei( 1, "ether")):
     account = account if account else get_account()
     link_token = link_token if link_token else get_contract("link_token")
     # we are going to transfer link token to the contract_address
