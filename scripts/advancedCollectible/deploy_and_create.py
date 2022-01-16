@@ -1,6 +1,9 @@
 from scripts.helpful_scripts import fund_with_link, get_account, OPENSEA_URL, get_contract
 from brownie import AdvancedCollectible, config, network
 
+
+# untill https://youtu.be/M576WGiDBdQ?t=39042
+
 # upload image/json file to IPFS
 
 def main():
@@ -26,4 +29,4 @@ def deploy_and_create():
     # tokenCounter() is the tokenID, but after every mint, it's already +1, so we need to -1 to get the actual minted tokenID
     print(f"AdvancedCollectible deployed at {advanced_collectible.address}")
     print("Please wait 20 minutes, and hit the refresh metadata button")
-    return advanced_collectible
+    return advanced_collectible, tx

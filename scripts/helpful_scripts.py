@@ -74,5 +74,5 @@ def fund_with_link(contract_address, account=None, link_token=None, amount=Web3.
     # link_token_contract = interface.LinkTokenInterface(link_token.address)
     # tx = link_token_contract.transfer(contract_address, amount, {"from": account})
     tx.wait(1)
-    print("Fund contract with Link token!")
+    print(f"Funded with Link: {contract_address}")
     return tx
