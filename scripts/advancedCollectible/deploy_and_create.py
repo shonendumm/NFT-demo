@@ -1,31 +1,28 @@
-# Untill here: https://youtu.be/M576WGiDBdQ?t=37168
-# Writing unit tests
+from scripts.helpful_scripts import fund_with_link, get_account, OPENSEA_URL, get_contract
+from brownie import AdvancedCollectible, config, network
 
-# Untill here: https://youtu.be/M576WGiDBdQ?t=36806
-# Prepare to add tokenURI metadata when creating collectible
-
-
-from scripts.helpful_scripts import get_account
-from brownie import SimpleCollectible
-
-
-# upload image/json file to IPFS, but this is from Patrick's tutorial
-sample_token_uri = 'https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json'
-
-
-# {NFT_contract_address}/{tokenId}
-opensea_url = "https://testnets.opensea.io/assets/{}/{}"
-
+# upload image/json file to IPFS
 
 def main():
     deploy_and_create()
 
 def deploy_and_create():
     account = get_account()
-    simple_collectible = SimpleCollectible.deploy({"from": account}, publish_source = True)
-    tx = simple_collectible.createCollectible(sample_token_uri, {"from": account})
+    # AdvancedCollectible needs the following for constructor:
+    # address _vrfCoordinator, address _linkToken, bytes32 _keyhash, uint256 _fee (rinkeby)
+    advanced_collectible = AdvancedCollectible.deploy(
+        get_contract("vrf_coordinator"),
+        get_contract("link_token"),
+        config["networks"][network.show_active()]["key_hash"],
+        config["networks"][network.show_active()]["fee"],        
+        {"from": account}, publish_source = config["networks"][network.show_active()].get("verify", False))
+    
+    # fund the contract with link tokens
+    fund_with_link(advanced_collectible.address)
+    # call createCollectible which will requestRandomness and pay fee (0.1) using funded link tokens
+    tx = advanced_collectible.createCollectible({"from": account})
     tx.wait(1)
-    print(f"Congrats! You can view your NFT now at {opensea_url.format(simple_collectible.address, simple_collectible.tokenCounter() - 1)}")
+    # print(f"Congrats! You can view your NFT now at {OPENSEA_URL.format(advanced_collectible.address, advanced_collectible.tokenCounter() - 1)}")
     # tokenCounter() is the tokenID, but after every mint, it's already +1, so we need to -1 to get the actual minted tokenID
     print("Please wait 20 minutes, and hit the refresh metadata button")
-    return simple_collectible
+    return advanced_collectible
