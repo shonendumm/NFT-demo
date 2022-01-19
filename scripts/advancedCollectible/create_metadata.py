@@ -46,10 +46,12 @@ def main():
             image_uri = image_uri if image_uri else breed_to_image_uri[breed]
 
             collectible_metadata["image"] = image_uri
+            # metadata completed, so we create a file (.json name) with it
             with open(metadata_file_name, "w") as file:
                 json.dump(collectible_metadata, file)
             if os.getenv("UPLOAD_IPFS") == "true":
                 upload_to_IPFS(metadata_file_name)
+            # currently false because we uploaded once, so we just skip it
 
 def upload_to_IPFS(filepath):
     # open the image files as read binary

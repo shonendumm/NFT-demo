@@ -4,6 +4,9 @@ pragma solidity 0.6.6;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
+// https://youtu.be/M576WGiDBdQ?t=42542
+// finished NFT lesson, up to lesson 12: upgrading contracts
+
 
 // until here https://youtu.be/M576WGiDBdQ?t=38432 
 // finished the contract but need to find way to add the tokenURI
