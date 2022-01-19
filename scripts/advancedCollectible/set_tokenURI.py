@@ -19,7 +19,7 @@ def main():
         breed = getBreed(advanced_collectible.tokenIdToBreed(token_id))
         # check that the token_id's URI is empty first
         if not advanced_collectible.tokenURI(token_id).startswith("https://"):
-        #     print(f"Setting tokenURI of {token_id}")
+            print(f"Setting tokenURI of {token_id}")
         #     set_tokenURI(token_id, advanced_collectible, dog_metadata_dic[breed])
             with open("./metadata/tokens_metadata_url.txt", "r") as file:
                 lines = file.readlines()
