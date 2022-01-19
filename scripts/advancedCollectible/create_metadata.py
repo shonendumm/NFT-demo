@@ -2,7 +2,10 @@ from brownie import AdvancedCollectible, network
 from scripts.helpful_scripts import getBreed
 from metadata.sample_metadata import metadata_template
 from pathlib import Path
-import requests
+import requests, json
+
+# until https://youtu.be/M576WGiDBdQ?t=41097
+# uploading image to pinata instead of IPFS 
 
 # until https://youtu.be/M576WGiDBdQ?t=40608
 # download ipfs commandline in order to upload images to ipfs programmatically
@@ -29,7 +32,10 @@ def main():
             # formatting the image_path so that we can get the respective files
             image_path = "./img/" + breed.lower().replace("_", "-") + ".png"
             image_uri = upload_to_IPFS(image_path)
-            # collectible_metadata["image"] = image_uri
+            collectible_metadata["image"] = image_uri
+            with open(metadata_file_name, "w") as file:
+                json.dump(collectible_metadata, file)
+            upload_to_IPFS(metadata_file_name)
 
 def upload_to_IPFS(filepath):
     # open the image files as read binary
