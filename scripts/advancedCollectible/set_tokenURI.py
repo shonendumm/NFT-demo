@@ -17,7 +17,7 @@ def main():
 
     for token_id in range(number_of_collectibles):
         breed = getBreed(advanced_collectible.tokenIdToBreed(token_id))
-        check that the token_id's URI is empty first
+        # check that the token_id's URI is empty first
         if not advanced_collectible.tokenURI(token_id).startswith("https://"):
         #     print(f"Setting tokenURI of {token_id}")
         #     set_tokenURI(token_id, advanced_collectible, dog_metadata_dic[breed])
