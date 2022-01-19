@@ -2,13 +2,20 @@ from brownie import AdvancedCollectible, network
 from scripts.helpful_scripts import getBreed
 from metadata.sample_metadata import metadata_template
 from pathlib import Path
-import requests, json
+import requests, json, os
 
 # until https://youtu.be/M576WGiDBdQ?t=41097
 # uploading image to pinata instead of IPFS 
 
 # until https://youtu.be/M576WGiDBdQ?t=40608
 # download ipfs commandline in order to upload images to ipfs programmatically
+
+breed_to_image_uri = {
+    "PUG": "https://ipfs.io/ipfs/QmSsYRx3LpDAb1GZQm7zZ1AuHZjfbPkD6J7s9r41xu1mf8?filename=pug.png",
+    "SHIBA_INU": "https://ipfs.io/ipfs/QmYx6GsYAKnNzZ9A6NvEKV9nf1VaDzJrqDR23Y8YSkebLU?filename=shiba-inu.png",
+    "ST_BERNARD": "https://ipfs.io/ipfs/QmUPjADFGEKmfohdTaNcWhp7VGk26h5jXDA7v3VtTnTLcW?filename=st-bernard.png"
+}
+
 
 def main():
     advanced_collectible = AdvancedCollectible[-1]
@@ -31,7 +38,12 @@ def main():
             print(collectible_metadata)
             # formatting the image_path so that we can get the respective files
             image_path = "./img/" + breed.lower().replace("_", "-") + ".png"
-            image_uri = upload_to_IPFS(image_path)
+            
+            image_uri = None
+            if os.getenv("UPLOAD_IPFS") == "true":
+                image_uri = upload_to_IPFS(image_path)
+            image_uri = image_uri if image_uri else breed_to_image_uri[breed]
+
             collectible_metadata["image"] = image_uri
             with open(metadata_file_name, "w") as file:
                 json.dump(collectible_metadata, file)
