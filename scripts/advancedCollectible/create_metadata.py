@@ -17,6 +17,7 @@ breed_to_image_uri = {
 }
 
 
+
 def main():
     advanced_collectible = AdvancedCollectible[-1]
     print(f"Your contract is deployed at: {advanced_collectible.address}")
@@ -25,6 +26,7 @@ def main():
     for token_id in range(number_of_advanced_collectibles):
         # returns a number 0 to 2, then we use python function to return the name
         breed = getBreed(advanced_collectible.tokenIdToBreed(token_id))
+        # can omit the token_id in the file name, if it's the same for all same breeds
         metadata_file_name = f"./metadata/{network.show_active()}/{token_id}-{breed}.json"
         print(metadata_file_name)
         collectible_metadata = metadata_template
@@ -49,10 +51,14 @@ def main():
             # metadata completed, so we create a file (.json name) with it
             with open(metadata_file_name, "w") as file:
                 json.dump(collectible_metadata, file)
+            
             if os.getenv("UPLOAD_IPFS") == "true":
-                upload_to_IPFS(metadata_file_name)
-            # currently false because we uploaded once, so we just skip it
+                token_metadata_url = upload_to_IPFS(metadata_file_name)
+                # write the metadata URL to a file, then we can pull it later into the tokenURI
+                with open("./metadata/tokens_metadata_url.txt" , "a") as file:
+                    file.write(token_metadata_url + '\n')
 
+# remember to run ipfs daemon (cli) first before uploading
 def upload_to_IPFS(filepath):
     # open the image files as read binary
     with Path(filepath).open("rb") as fp:
@@ -66,7 +72,7 @@ def upload_to_IPFS(filepath):
         ipfs_hash = response.json()["Hash"]
         # "./img/PUG.png" -> "PUG.pug" (We split the string by / into an array, then take the last item)
         filename = filepath.split("/")[-1:][0]
-        # this is the image_uri path where the image is stored
+        # this is the image_uri or file_uri path where the image is stored
         image_uri = f"https://ipfs.io/ipfs/{ipfs_hash}?filename={filename}"
         print(image_uri)
         return image_uri
