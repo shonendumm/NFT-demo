@@ -39,6 +39,7 @@ def main():
             # formatting the image_path so that we can get the respective files
             image_path = "./img/" + breed.lower().replace("_", "-") + ".png"
             
+            # skip upload to ipfs since we already uploaded them.
             image_uri = None
             if os.getenv("UPLOAD_IPFS") == "true":
                 image_uri = upload_to_IPFS(image_path)
@@ -47,7 +48,8 @@ def main():
             collectible_metadata["image"] = image_uri
             with open(metadata_file_name, "w") as file:
                 json.dump(collectible_metadata, file)
-            upload_to_IPFS(metadata_file_name)
+            if os.getenv("UPLOAD_IPFS") == "true":
+                upload_to_IPFS(metadata_file_name)
 
 def upload_to_IPFS(filepath):
     # open the image files as read binary

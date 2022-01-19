@@ -28,5 +28,5 @@ def deploy_and_create():
     # print(f"Congrats! You can view your NFT now at {OPENSEA_URL.format(advanced_collectible.address, advanced_collectible.tokenCounter() - 1)}")
     # tokenCounter() is the tokenID, but after every mint, it's already +1, so we need to -1 to get the actual minted tokenID
     print(f"AdvancedCollectible deployed at {advanced_collectible.address}")
-    print("Please wait 20 minutes, and hit the refresh metadata button")
+    print("Please wait 20 minutes for VRFCoordinator to callback fulfillrandomness")
     return advanced_collectible, tx
