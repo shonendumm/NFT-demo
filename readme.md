@@ -6,19 +6,21 @@ https://testnets.opensea.io/assets/0x6E0C3760670875De758f15EEDdC8d311F274Cea6/0
 brownie run scripts/simpleCollectible/deploy_and_create.py --network rinkeby
 
 ### Note
-The code written here is only compatible with older versions of solidity and openzeppelin contracts.
-
-The new openzeppelin contract's implementation of ERC721, i.e. its functions/ABI are different, and requires a newer version of solidity.
+The code written here is only compatible with older versions of solidity and openzeppelin contracts. The new openzeppelin contract's implementation of ERC721, i.e. its functions/ABI are different, and requires a newer version of solidity.
 
 Hence, depending on which release of openzeppelin you're importing/inheriting for ERC721, we need to look at the documentation for the ABI/functions.
 
 ### How does opensea keep track of newly minted NFTs? (including testnets)
-
 See https://ethereum.stackexchange.com/questions/106942/what-process-does-opensea-use-to-get-all-the-nfts-of-a-wallet/106949 
 
-"OpenSea saves all the addresses of the ERC721 contract through EtherScan, then loads the contract to look up the NFT and adds a listen on the contract so it knows when someone is creating an NFT or moving an NFT!
+OpenSea looks up all addresses on Etherscan, notes down the ERC721 contracts, adds a listener on the contract so it knows when someone is creating an NFT or moving an NFT, and then records the wallet address of the person holding the NFT.
 
-While you're doing this, Opensea updates the NFT information to its own server, so when you're done, go to Opensea and you'll see your NFT.Sometimes it's slow, like when the metadata isn't showing, you can click sync." Or refresh webpage.
+It stores these information in its own database. So when you connect your wallet to it, it retrieves your wallet address from its database, plus all the NFTs it had recorded as belonging to your wallet address.
+
+Why?
+Because your wallet (address) doesn't really store your NFTs.
+It's the NFT contract that records your wallet address. Every NFT contract has a balanceOf(address) and ownerOf(tokenId) function which are essentially based on recording your wallet address to the number of coins it holds (i.e. balanceOf) and recording your wallet address to a particular token (i.e. ownerOf).
+
 
 ### What is the amount of ETH and gas fees to deploy the contract and mint the NFT on rinkeby?
 View the example txn details at https://rinkeby.etherscan.io/address/0xf0Da5D362fF2031CdACeAd3fE1a55bFf7288d5Ec
