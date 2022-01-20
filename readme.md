@@ -47,19 +47,23 @@ Refer to NFTonChain repo
 
 ### Deploy AdvancedCollectible contract to testnet
 
->brownie run scripts/AdvancedCollectible/deploy_and_create.py --network rinkeby
+`brownie run scripts/AdvancedCollectible/deploy_and_create.py --network rinkeby`
+
 This deploys the contract to rinkeby testnet and creates 1 NFT (random breed based on verified random number returned from Chainlink)
 
->brownie run scripts/AdvancedCollectible/createCollectible.py --network rinkeby
+`brownie run scripts/AdvancedCollectible/createCollectible.py --network rinkeby`
+
 This creates 1 NFT from the deployed contract (also of random breed)
 
->brownie run scripts/AdvancedCollectible/create_metadata.py --network rinkeby
+`brownie run scripts/AdvancedCollectible/create_metadata.py --network rinkeby`
+
 This retrieves number of NFTs minted and creates the metadata for them.
 Note: On the testnet, it may be slower to mint the NFT as it takes time for Chainlink to return the random number, which our contract uses to assign the breed.
 
 After confirming that the NFTs have been minted, e.g. reading tokenCounter on the verified contract on rinkeby.etherscan should return >0 , i.e. number of NFTs minted.
 
 We can proceed to set the tokenURI for each NFT.
->brownie run scripts/AdvancedCollectible/set_tokenURI.py --network rinkeby
+
+`brownie run scripts/AdvancedCollectible/set_tokenURI.py --network rinkeby`
 
 This sets the tokenURI for each NFT to point to a json file hosted on IPFS. The JSON file contains the name, description, image_uri, and attributes information of the particular NFT.
