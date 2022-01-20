@@ -41,9 +41,9 @@ Refer to NFTonChain repo
 
 ## AdvancedCollectible
 
-1. Upload an image to IPFS (or pinata) ourselves
-2. Verifiably scarce/ random. 
-3. 
+1. Upload an image to IPFS (or pinata) via cli
+2. Verifiably scarce/ random creation of NFT Dog breed via Chainlink VRFCoordinator
+3. Add metadata to NFT token
 
 ### Deploy AdvancedCollectible contract to testnet
 
